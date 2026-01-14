@@ -4,7 +4,7 @@ import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { ShiftsModule } from './shifts/shifts.module';
 import { AssignmebtsModule } from './assignmebts/assignmebts.module';
-import { AuthModule } from './auth/auth.module';
+
 import { SequelizeModule } from '@nestjs/sequelize';
 import { User } from './users/entities/user.entity';
 import { Shifts } from './shifts/entities/shift.entity';
@@ -15,7 +15,6 @@ import { Assignments } from './assignmebts/entities/assignmebt.entity';
     UsersModule,
     ShiftsModule,
     AssignmebtsModule,
-    AuthModule,
     SequelizeModule.forRoot({
       dialect: 'mysql',
       host: '127.0.0.1',

@@ -3,7 +3,6 @@ import { CreateUserDto } from './dto/user.dto';
 import { User } from './entities/user.entity';
 import { InjectModel } from '@nestjs/sequelize';
 import * as bcrypt from 'bcrypt';
-import { where } from 'sequelize';
 
 @Injectable()
 export class UsersService {
@@ -13,7 +12,7 @@ export class UsersService {
   ) {}
   async create(createUserDto: CreateUserDto) {
     createUserDto.password = await bcrypt.hash(createUserDto.password, 10);
-    return await this.userModel.create({ createUserDto } as any);
+    return await this.userModel.create(createUserDto as any);
   }
 
   async findAll(): Promise<User[]> {
@@ -33,6 +32,7 @@ export class UsersService {
     if (!user) {
       throw new NotFoundException('user not found');
     }
+    userUpdateDto.password = await bcrypt.hash(userUpdateDto.password, 10);
     return user.update(userUpdateDto);
   }
 
